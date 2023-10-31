@@ -15,7 +15,7 @@
 /**
  * @typedef {{
  *   name: string
- *   nutrients: Nutrient_Content[]
+ *   nutrient_content: Nutrient_Content[]
  *   meta?: Record<string, any>
  * }} Food
  */
