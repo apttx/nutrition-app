@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Data parsing & transformation for the nutrition app.",
   "scripts": {
-    "develop": "nodemon -i build/ source/Schweizer_Nahrwertdatenbank.mjs",
+    "develop": "NODE_ENV=development nodemon -i build/ source/Schweizer_Nahrwertdatenbank.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

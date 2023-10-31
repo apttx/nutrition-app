@@ -176,7 +176,11 @@ const main = async () => {
   const foods = records.map((record) => get_food(record))
 
   const output_file_path = join(output_files_directory, 'foods.json')
-  const output_file_string = JSON.stringify(foods)
+  const output_file_string = JSON.stringify(
+    foods,
+    null,
+    process.env.NODE_ENV === 'development' ? 2 : undefined,
+  )
   await writeFile(output_file_path, output_file_string)
 }
 
