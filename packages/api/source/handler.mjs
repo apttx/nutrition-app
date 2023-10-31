@@ -1,5 +1,4 @@
 import { createYoga } from 'graphql-yoga'
-import { nanoid } from 'nanoid'
 
 import { schema } from './schema.mjs'
 
@@ -14,7 +13,7 @@ export const handler = (options) => {
   const graphiql = options.graphiql ?? false
   const landingPage = options.landingPage ?? false
 
-  const foods = options.foods.map((food) => ({ ...food, id: nanoid() }))
+  const { foods } = options
 
   const context = () => ({ foods })
 
