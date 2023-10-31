@@ -1,0 +1,20 @@
+{
+  "name": "@aptt/nutrition-app-data",
+  "version": "1.0.0",
+  "description": "Data parsing & transformation for the nutrition app.",
+  "scripts": {
+    "develop": "nodemon -i build/ source/Schweizer_Nahrwertdatenbank.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "aptt",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.3",
+    "prettier-plugin-jsdoc": "^1.1.1"
+  },
+  "dependencies": {
+    "csv-parse": "^5.5.2"
+  }
+}
