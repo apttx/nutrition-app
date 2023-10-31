@@ -1,0 +1,35 @@
+{
+  "name": "@aptt/nutrition-app-api",
+  "version": "1.0.0",
+  "description": "API for the nutrition app.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "nodemon scripts/develop.mjs",
+    "prettier": "prettier --ignore-path .gitignore --check .",
+    "eslint": "eslint --config .eslintrc.cjs source/* scripts/*",
+    "lint": "concurrently --group --prefix-colors green,magenta npm:prettier npm:eslint"
+  },
+  "keywords": [
+    "cantonese",
+    "dictionary"
+  ],
+  "author": "aptt",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "graphql": "^16.7.1",
+    "graphql-yoga": "^4.0.3",
+    "lunr": "^2.3.9",
+    "nanoid": "^5.0.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-terser": "^0.4.3",
+    "concurrently": "^8.2.0",
+    "eslint": "^8.46.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.0",
+    "prettier-plugin-jsdoc": "^1.0.1"
+  }
+}
