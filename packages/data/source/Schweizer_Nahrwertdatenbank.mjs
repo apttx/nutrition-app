@@ -94,6 +94,10 @@ const get_amount = (key, value) => {
   const unit = unit_substring.replace(/[()]/g, '')
   const amount = parseFloat(value)
 
+  if (isNaN(amount)) {
+    return null
+  }
+
   const result = {
     unit,
     amount,
