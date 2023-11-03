@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'node:fs/promises'
+import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { cwd } from 'node:process'
 
@@ -179,6 +179,11 @@ const main = async () => {
 
   const foods = records.map((record) => get_food(record))
 
+  try {
+    await mkdir(output_files_directory, { recursive: true })
+  } catch {
+    // ignore errors
+  }
   const output_file_path = join(output_files_directory, 'foods.json')
   const output_file_string = JSON.stringify(
     foods,
