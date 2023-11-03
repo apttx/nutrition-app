@@ -111,7 +111,7 @@ const get_food = (record) => {
   const { nutrient_data } = split_food_and_nutrient_data(record)
 
   /** @type {Nutrient_Content[]} */
-  const nutrient_content = []
+  const nutrient_contents = []
 
   const nutrient_entries = /** @type {[Nutrient_Key, string][]} */ (Object.entries(nutrient_data))
   for (const [nutrient_key, value] of nutrient_entries) {
@@ -121,12 +121,12 @@ const get_food = (record) => {
       name,
     }
 
-    const nutrient_content_item = {
+    const nutrient_content = {
       nutrient,
       amount,
     }
 
-    nutrient_content.push(nutrient_content_item)
+    nutrient_contents.push(nutrient_content)
   }
 
   const name = record['Name']
@@ -144,7 +144,7 @@ const get_food = (record) => {
   const food = {
     name,
     meta,
-    nutrient_content,
+    nutrient_contents,
   }
 
   return food

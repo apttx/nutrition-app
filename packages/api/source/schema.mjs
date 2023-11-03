@@ -20,7 +20,7 @@ export const schema = createSchema({
     type Food {
       id: String!
       name: String!
-      nutrient_content(minimum_amount: Float): [Nutrent_Content!]!
+      nutrient_contents(minimum_amount: Float): [Nutrent_Content!]!
     }
 
     type Query {
@@ -55,14 +55,14 @@ export const schema = createSchema({
        *   { minimum_amount?: number }
        * >}
        */
-      nutrient_content: (parent, args) => {
+      nutrient_contents: (parent, args) => {
         const { minimum_amount } = args
 
         if (minimum_amount === undefined) {
-          return parent.nutrient_content
+          return parent.nutrient_contents
         }
 
-        const nutrient_content = parent.nutrient_content.filter((nutrient_content) => {
+        const nutrient_contents = parent.nutrient_contents.filter((nutrient_content) => {
           if (!nutrient_content.amount) {
             return false
           }
@@ -72,7 +72,7 @@ export const schema = createSchema({
           return is_more_grams_than_minimum
         })
 
-        return nutrient_content
+        return nutrient_contents
       },
     },
   },
