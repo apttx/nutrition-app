@@ -39,7 +39,7 @@ export const schema = createSchema({
           lower_bound = index + 1
         }
 
-        let limit = args.limit ?? 20
+        const limit = args.limit ?? 100
         const upper_bound = lower_bound + limit
 
         const result = foods.slice(lower_bound, upper_bound)
