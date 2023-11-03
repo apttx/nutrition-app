@@ -15,6 +15,7 @@ export const handler = (options) => {
 
   const { foods } = options
 
+  /** @returns {Resolver_Context} */
   const context = () => ({ foods })
 
   const yoga = createYoga({

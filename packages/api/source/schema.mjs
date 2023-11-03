@@ -1,10 +1,6 @@
 import { createSchema } from 'graphql-yoga'
 
-/**
- * @type {import('graphql-yoga').GraphQLSchemaWithContext<{
- *   foods: Identifiable<Food>[]
- * }>}
- */
+/** @type {import('graphql-yoga').GraphQLSchemaWithContext<Resolver_Context>} */
 export const schema = createSchema({
   typeDefs: /* GraphQL */ `
     type Amount {
