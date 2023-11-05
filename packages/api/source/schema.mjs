@@ -8,11 +8,64 @@ export const schema = createSchema({
       amount: Float!
     }
 
-    type Nutrient {
-      name: String!
+    type Nutrient_Meta {
+      wikipedia_link: String
+      pub_chem_link: String
     }
 
-    type Nutrent_Content {
+    enum Micronutrient_Category {
+      micronutrient
+    }
+    enum Macronutrient_Category {
+      macronutrient
+    }
+
+    interface Abstract_Nutrient {
+      name: String!
+      meta: Nutrient_Meta!
+    }
+
+    type Element implements Abstract_Nutrient {
+      name: String!
+      category: Micronutrient_Category!
+      symbol: String!
+      meta: Nutrient_Meta!
+    }
+
+    type Molecule implements Abstract_Nutrient {
+      name: String!
+      category: Micronutrient_Category!
+      iupac_name: String!
+      meta: Nutrient_Meta!
+    }
+
+    type Provitamin implements Abstract_Nutrient {
+      name: String!
+      category: Micronutrient_Category!
+      iupac_name: String!
+      letter: String!
+      number: Int
+      meta: Nutrient_Meta!
+    }
+
+    type Vitamin implements Abstract_Nutrient {
+      name: String!
+      category: Micronutrient_Category!
+      iupac_name: String!
+      letter: String!
+      number: Int
+      meta: Nutrient_Meta!
+    }
+
+    type Macronutrient implements Abstract_Nutrient {
+      name: String!
+      category: Macronutrient_Category!
+      meta: Nutrient_Meta!
+    }
+
+    union Nutrient = Element | Molecule | Provitamin | Vitamin | Macronutrient
+
+    type Nutrient_Content {
       nutrient: Nutrient
       amount: Amount
     }
@@ -20,7 +73,7 @@ export const schema = createSchema({
     type Food {
       id: String!
       name: String!
-      nutrient_contents(minimum_amount: Float): [Nutrent_Content!]!
+      nutrient_contents(minimum_amount: Float): [Nutrient_Content!]!
     }
 
     type Query {
@@ -73,6 +126,30 @@ export const schema = createSchema({
         })
 
         return nutrient_contents
+      },
+    },
+    Nutrient: {
+      /** @type {import('graphql').GraphQLTypeResolver<Nutrient, Resolver_Context>} */
+      __resolveType: (source) => {
+        if (source.category === 'macronutrient') {
+          return 'Macronutrient'
+        }
+
+        if (source.type === 'element') {
+          return 'Element'
+        }
+
+        if (source.type === 'molecule') {
+          return 'Molecule'
+        }
+
+        if (source.type === 'provitamin') {
+          return 'Provitamin'
+        }
+
+        if (source.type === 'vitamin') {
+          return 'Vitamin'
+        }
       },
     },
   },
