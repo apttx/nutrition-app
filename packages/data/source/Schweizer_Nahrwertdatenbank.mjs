@@ -4,58 +4,15 @@ import { cwd } from 'node:process'
 
 import { parse } from 'csv-parse'
 import { entries, from_entries } from './object.mjs'
+import { nutrient_key_to_get_nutrient_map } from './Schweizer_Nahrwertdatenbank.utilities.mjs'
 
 const data_files_directory = join(cwd(), 'data_files')
 const output_files_directory = join(cwd(), 'build')
 
-/** @type {Record<Nutrient_Key, string>} */
-const nutrient_name_map = {
-  'Alkohol (g)': 'alcohol',
-  'Betacarotin (µg)': 'beta_carotin',
-  'Betacarotin-Aktivität (µg-BCE)': 'beta_carotin_activity',
-  'Calcium (Ca) (mg)': 'Ca',
-  'Chlorid (Cl) (mg)': 'Cl',
-  'Cholesterin (mg)': 'cholesterol',
-  'Eisen (Fe) (mg)': 'Fe',
-  'Fettsäuren, einfach ungesättigt (g)': 'mono-unsaturated_fatty_acids',
-  'Fettsäuren, gesättigt (g)': 'saturated_fatty_acids',
-  'Fettsäuren, mehrfach ungesättigt (g)': 'poly-unsaturated_fatty_acids',
-  'Folat (µg)': 'folate',
-  'Jod (I) (µg)': 'I',
-  'Kalium (K) (mg)': 'K',
-  'Kohlenhydrate, verfügbar (g)': 'available_carbohydrates',
-  'Magnesium (Mg) (mg)': 'Mg',
-  'Nahrungsfasern (g)': 'fiber',
-  'Natrium (Na) (mg)': 'Na',
-  'Niacin (mg)': 'niacin',
-  'Pantothensäure (mg)': 'patothenic_acid',
-  'Phosphor (P) (mg)': 'P',
-  'Protein (g)': 'protein',
-  'Retinol (µg)': 'retinol',
-  'Salz (NaCl) (g)': 'NaCl',
-  'Selen (Se) (µg)': 'Se',
-  'Stärke (g)': 'starch',
-  'Vitamin A-Aktivität, RAE (µg-RE)': 'vitamin_a_activity_rae',
-  'Vitamin A-Aktivität, RE (µg-RE)': 'vitamin_a_activity_re',
-  'Vitamin B1 (Thiamin) (mg)': 'vitamin_b1',
-  'Vitamin B12 (Cobalamin) (µg)': 'vitamin_b12',
-  'Vitamin B2 (Riboflavin) (mg)': 'vitamin_b2',
-  'Vitamin B6 (Pyridoxin) (mg)': 'vitamin_b6',
-  'Vitamin C (Ascorbinsäure) (mg)': 'vitamin_c',
-  'Vitamin D (Calciferol) (µg)': 'vitamin_d',
-  'Vitamin E (α-Tocopherol) (mg)': 'vitamin_e',
-  'Wasser (g)': 'H2O',
-  'Zink (Zn)  (mg)': 'Zn',
-  'Zucker (g)': 'sugar',
-  'Energie, Kalorien (kcal)': 'energy_in_calories',
-  'Energie, Kilojoule (kJ)': 'energy_in_kilojoule',
-  'Fett, total (g)': 'fat',
-}
-
 /** @type {(entry: [Record_Key, string]) => entry is [Food_Key, string]} */
-const is_food_entry = (entry) => !(entry[0] in nutrient_name_map)
+const is_food_entry = (entry) => !(entry[0] in nutrient_key_to_get_nutrient_map)
 /** @type {(entry: [Record_Key, string]) => entry is [Nutrient_Key, string]} */
-const is_nutrient_entry = (entry) => entry[0] in nutrient_name_map
+const is_nutrient_entry = (entry) => entry[0] in nutrient_key_to_get_nutrient_map
 /**
  * @type {(record: Record<Record_Key, string>) => {
  *   food_data: Record<Food_Key, string>
@@ -76,9 +33,10 @@ const split_food_and_nutrient_data = (record) => {
   return split_data
 }
 
-/** @type {(string: Nutrient_Key) => string} */
-const get_nutrient_name = (string) => {
-  const nutrient_name = nutrient_name_map[string]
+/** @type {(nutrient_key: Nutrient_Key) => string} */
+const get_nutrient_name = (nutrient_key) => {
+  const key_without_bracketed_information = nutrient_key.replace(/\(.+\)/g, '')
+  const nutrient_name = key_without_bracketed_information.trim()
 
   return nutrient_name
 }
@@ -117,9 +75,8 @@ const get_food = (record) => {
   for (const [nutrient_key, value] of nutrient_entries) {
     const amount = get_amount(nutrient_key, value)
     const name = get_nutrient_name(nutrient_key)
-    const nutrient = {
-      name,
-    }
+    const get_nutrient = nutrient_key_to_get_nutrient_map[nutrient_key]
+    const nutrient = get_nutrient(name)
 
     const nutrient_content = {
       nutrient,
