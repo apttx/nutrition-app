@@ -13,35 +13,34 @@ export const schema = createSchema({
       pub_chem_link: String
     }
 
-    enum Micronutrient_Category {
+    enum Nutrient_Category {
       micronutrient
-    }
-    enum Macronutrient_Category {
       macronutrient
     }
 
     interface Abstract_Nutrient {
       name: String!
+      category: Nutrient_Category!
       meta: Nutrient_Meta!
     }
 
     type Element implements Abstract_Nutrient {
       name: String!
-      category: Micronutrient_Category!
+      category: Nutrient_Category!
       symbol: String!
       meta: Nutrient_Meta!
     }
 
     type Molecule implements Abstract_Nutrient {
       name: String!
-      category: Micronutrient_Category!
+      category: Nutrient_Category!
       iupac_name: String!
       meta: Nutrient_Meta!
     }
 
     type Provitamin implements Abstract_Nutrient {
       name: String!
-      category: Micronutrient_Category!
+      category: Nutrient_Category!
       iupac_name: String!
       letter: String!
       number: Int
@@ -50,7 +49,7 @@ export const schema = createSchema({
 
     type Vitamin implements Abstract_Nutrient {
       name: String!
-      category: Micronutrient_Category!
+      category: Nutrient_Category!
       iupac_name: String!
       letter: String!
       number: Int
@@ -59,7 +58,7 @@ export const schema = createSchema({
 
     type Macronutrient implements Abstract_Nutrient {
       name: String!
-      category: Macronutrient_Category!
+      category: Nutrient_Category!
       meta: Nutrient_Meta!
     }
 
