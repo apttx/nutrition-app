@@ -225,11 +225,7 @@ export const nutrient_key_to_get_nutrient_map = {
     wikipedia_link: 'https://de.wikipedia.org/wiki/Retinol',
     pub_chem_link: 'https://pubchem.ncbi.nlm.nih.gov/compound/445354',
   }),
-  'Salz (NaCl) (g)': get_get_molecule({
-    iupac_name: 'sodium;chloride',
-    wikipedia_link: 'https://de.wikipedia.org/wiki/Natriumchlorid',
-    pub_chem_link: 'https://pubchem.ncbi.nlm.nih.gov/compound/5234',
-  }),
+  'Salz (NaCl) (g)': get_get_macronutrient({}),
   'Selen (Se) (µg)': get_get_element({ symbol: 'Se' }),
   'Stärke (g)': get_get_macronutrient({}),
   // TODO: molecule group (not a single molecule). here specifically: vitamere group; would also include beta carotine and retinol in this case.
