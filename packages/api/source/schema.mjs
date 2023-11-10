@@ -1,3 +1,4 @@
+import { GraphQLError } from 'graphql'
 import { createSchema } from 'graphql-yoga'
 
 /** @type {import('graphql-yoga').GraphQLSchemaWithContext<Resolver_Context>} */
@@ -76,11 +77,31 @@ export const schema = createSchema({
     }
 
     type Query {
-      foods: [Food!]!
+      food(id: ID!): Food!
+      foods(after: String, limit: Int): [Food!]!
     }
   `,
   resolvers: {
     Query: {
+      /**
+       * @type {import('graphql').GraphQLFieldResolver<
+       *   never,
+       *   Resolver_Context,
+       *   { id: string },
+       *   Identifiable<Food>
+       * >}
+       */
+      food: (_, args, context) => {
+        const food = context.foods.find((food) => food.id === args.id)
+
+        if (!food) {
+          throw new GraphQLError(`food with id ${JSON.stringify(args.id)} does not exist`, {
+            extensions: { id: args.id, http: { status: 404 } },
+          })
+        }
+
+        return food
+      },
       foods: (_, args, context) => {
         const { foods } = context
 
