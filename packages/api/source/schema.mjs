@@ -102,6 +102,14 @@ export const schema = createSchema({
 
         return food
       },
+      /**
+       * @type {import('graphql').GraphQLFieldResolver<
+       *   never,
+       *   Resolver_Context,
+       *   { after?: string; limit?: number },
+       *   Identifiable<Food>[]
+       * >}
+       */
       foods: (_, args, context) => {
         const { foods } = context
 
