@@ -71,7 +71,7 @@ export const schema = createSchema({
     }
 
     type Food {
-      id: String!
+      id: ID!
       name: String!
       nutrient_contents(minimum_amount: Float): [Nutrient_Content!]!
     }
