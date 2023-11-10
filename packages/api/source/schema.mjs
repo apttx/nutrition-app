@@ -81,7 +81,7 @@ export const schema = createSchema({
 
     type Query {
       food(id: ID!): Food!
-      foods(after: String, limit: Int): [Food!]!
+      foods(after: ID, limit: Int): [Food!]!
     }
   `,
   resolvers: {
