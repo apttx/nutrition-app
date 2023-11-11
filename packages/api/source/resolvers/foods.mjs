@@ -1,3 +1,5 @@
+import { paginate } from '../pagination.mjs'
+
 /**
  * @type {import('graphql').GraphQLFieldResolver<
  *   never,
@@ -9,17 +11,10 @@
 export const foods = (_, args, context) => {
   const { foods } = context
 
-  let lower_bound = 0
-  if (args.after) {
-    const index = foods.findIndex((food) => food.id === args.after)
+  const after = args.after ?? foods[0]?.id
+  const limit = args.limit ?? 10
 
-    lower_bound = index + 1
-  }
+  const paginated = paginate({ after, limit }, foods)
 
-  const limit = args.limit ?? 20
-  const upper_bound = lower_bound + limit
-
-  const result = foods.slice(lower_bound, upper_bound)
-
-  return result
+  return paginated
 }
