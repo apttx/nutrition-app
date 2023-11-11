@@ -59,7 +59,7 @@ export const search = (_, args, context) => {
         search_result_b.matches.length - search_result_a.matches.length,
     )
 
-  const after = args.after ?? search_matches[0]?.id
+  const after = args.after
   const limit = args.limit ?? 10
 
   const paginated = paginate({ after, limit }, search_matches)

@@ -11,7 +11,7 @@ import { paginate } from '../pagination.mjs'
 export const foods = (_, args, context) => {
   const { foods } = context
 
-  const after = args.after ?? foods[0]?.id
+  const after = args.after
   const limit = args.limit ?? 10
 
   const paginated = paginate({ after, limit }, foods)
