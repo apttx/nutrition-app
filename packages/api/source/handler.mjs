@@ -15,8 +15,12 @@ export const handler = (options) => {
 
   const { foods } = options
 
-  /** @returns {Resolver_Context} */
-  const context = () => ({ foods })
+  /**
+   * @type {(
+   *   initial_context: import('graphql-yoga').YogaInitialContext,
+   * ) => import('graphql-yoga').YogaInitialContext & Resolver_Context}
+   */
+  const context = (initial_context) => ({ ...initial_context, foods })
 
   const yoga = createYoga({
     schema,

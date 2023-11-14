@@ -6,7 +6,11 @@ import { __resolveType as resolve_nutrient_type } from './resolvers/types/Nutrie
 import { search } from './resolvers/search.mjs'
 import { __resolveType as resolve_search_result_highlight_element_type } from './resolvers/types/Search_Result_Highlight_Element.mjs'
 
-/** @type {import('graphql-yoga').GraphQLSchemaWithContext<Resolver_Context>} */
+/**
+ * @type {import('graphql-yoga').GraphQLSchemaWithContext<
+ *   import('graphql-yoga').YogaInitialContext & Resolver_Context
+ * >}
+ */
 export const schema = createSchema({
   typeDefs: /* GraphQL */ `
     type Amount {
