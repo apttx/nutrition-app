@@ -4,7 +4,7 @@ import { schema } from './schema.mjs'
 
 /**
  * @type {(options: {
- *   foods: Identifiable<Food>[]
+ *   foods: (Identifiable & Food)[]
  *   graphiql?: boolean
  *   landingPage?: boolean
  * }) => import('node:http').RequestListener}

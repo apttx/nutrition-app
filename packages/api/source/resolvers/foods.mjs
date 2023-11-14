@@ -5,7 +5,7 @@ import { paginate } from '../pagination.mjs'
  *   never,
  *   Resolver_Context,
  *   { after?: string; limit?: number; where?: { ids?: string[] } },
- *   Identifiable<Food>[]
+ *   (Identifiable & Food)[]
  * >}
  */
 export const foods = (_, args, context) => {

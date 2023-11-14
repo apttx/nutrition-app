@@ -19,7 +19,7 @@ import { paginate } from '../pagination.mjs'
  */
 /**
  * @typedef {{
- *   food: Identifiable<Food>
+ *   food: Identifiable & Food
  *   highlights: {
  *     all_properties: Search_Result_Highlight
  *     properties: {

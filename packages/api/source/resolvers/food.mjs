@@ -5,7 +5,7 @@ import { GraphQLError } from 'graphql'
  *   never,
  *   Resolver_Context,
  *   { id: string },
- *   Identifiable<Food>
+ *   Identifiable & Food
  * >}
  */
 export const food = (_, args, context) => {

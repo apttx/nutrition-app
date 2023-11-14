@@ -1,0 +1,5 @@
+/**
+ * @typedef {{
+ *   id: string
+ * }} Identifiable
+ */

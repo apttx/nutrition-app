@@ -1,5 +1,5 @@
 /**
  * @typedef {{
- *   foods: Identifiable<Food>[]
+ *   foods: (Identifiable & Food)[]
  * }} Resolver_Context
  */
