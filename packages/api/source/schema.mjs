@@ -79,7 +79,11 @@ export const schema = createSchema({
       amount: Amount
     }
 
-    type Food {
+    interface Identifiable {
+      id: ID!
+    }
+
+    type Food implements Identifiable {
       id: ID!
       name: String!
       nutrient_contents(minimum_amount: Float): [Nutrient_Content!]!
