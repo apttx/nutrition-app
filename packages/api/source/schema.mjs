@@ -106,9 +106,13 @@ export const schema = createSchema({
       highlights: Food_Search_Result_Highlights!
     }
 
+    input Foods_Where_Input {
+      ids: [String!]
+    }
+
     type Query {
       food(id: ID!): Food!
-      foods(after: ID, limit: Int): [Food!]!
+      foods(after: ID, limit: Int, where: Foods_Where_Input): [Food!]!
       search(term: String!, after: ID, limit: Int): [Food_Search_Result!]!
     }
   `,
