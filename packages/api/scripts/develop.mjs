@@ -16,12 +16,22 @@ const load_json_file = async (file_path) => {
   return definition
 }
 
+/** @type {(name: string) => string} */
+const slugify = (name) => name.replace(/\W+/gi, '-').replace(/^-|-$/gi, '').toLowerCase()
+
 const develop = async () => {
   console.info('reading files')
   const foods_file_path = resolve(cwd(), '../data/build/foods.json')
   /** @type {Food[]} */
   const food_datums = await load_json_file(foods_file_path)
-  const foods = food_datums.map((food) => ({ ...food, id: nanoid() }))
+  const foods = food_datums.map((food) => {
+    const id = nanoid()
+    const slug = slugify(food.name)
+
+    const identifiable_slugifiable_food = { ...food, id, slug }
+
+    return identifiable_slugifiable_food
+  })
 
   console.info('creating server instance')
   const request_handler = handler({

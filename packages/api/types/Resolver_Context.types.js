@@ -1,5 +1,5 @@
 /**
  * @typedef {{
- *   foods: (Identifiable & Food)[]
+ *   foods: (Identifiable & Slugifiable & Food)[]
  * }} Resolver_Context
  */

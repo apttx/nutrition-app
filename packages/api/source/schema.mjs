@@ -83,8 +83,13 @@ export const schema = createSchema({
       id: ID!
     }
 
-    type Food implements Identifiable {
+    interface Slugifiable {
+      slug: String!
+    }
+
+    type Food implements Identifiable & Slugifiable {
       id: ID!
+      slug: String!
       name: String!
       nutrient_contents(minimum_amount: Float): [Nutrient_Content!]!
     }
@@ -116,10 +121,16 @@ export const schema = createSchema({
 
     input Foods_Where {
       ids: [String!]
+      slugs: [String!]
+    }
+
+    input Food_Where {
+      id: ID
+      slug: String
     }
 
     type Query {
-      food(id: ID!): Food!
+      food(where: Food_Where!): Food!
       foods(after: ID, limit: Int, where: Foods_Where): [Food!]!
       search(term: String!, after: ID, limit: Int): [Food_Search_Result!]!
     }
