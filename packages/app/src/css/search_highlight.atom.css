@@ -1,0 +1,11 @@
+.search_highlight em {
+  color: var(--color-blue-6);
+  font-style: normal;
+  font-weight: 500;
+}
+
+@media (prefers-color-scheme: dark) {
+  .search_highlight em {
+    color: var(--color-blue-4);
+  }
+}

@@ -1,0 +1,11 @@
+:root {
+  --width_text: 30rem;
+  --width_page: 50rem;
+  --width_layout: 70rem;
+
+  --margin_screen-borders: 1.5rem;
+
+  --margin_content_text: clamp(var(--margin_screen-borders), 100%, 50% - var(--width_text) / 2);
+  --margin_content_page: clamp(var(--margin_screen-borders), 100%, 50% - var(--width_page) / 2);
+  --margin_content_layout: clamp(var(--margin_screen-borders), 100%, 50% - var(--width_layout) / 2);
+}

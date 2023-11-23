@@ -1,0 +1,27 @@
+@media (pointer: fine) {
+  .na_link {
+    transition-duration: 150ms;
+    transition-property: color;
+    transition-timing-function: ease-in;
+  }
+  .na_link:hover {
+    transition-timing-function: ease-out;
+    color: var(--context_color_hint);
+  }
+  .na_link:active {
+    transition-timing-function: ease-out;
+    color: var(--context_color_interact);
+  }
+}
+
+@media (pointer: coarse) {
+  .na_link {
+    transition-duration: 500ms;
+    transition-property: color;
+    transition-timing-function: cubic-bezier(0.5, 0, 0.3, 1);
+  }
+  .na_link:active {
+    transition-duration: 0ms;
+    color: var(--context_color_interact);
+  }
+}

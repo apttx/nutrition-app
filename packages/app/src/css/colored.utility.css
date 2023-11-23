@@ -1,0 +1,94 @@
+.colored_base {
+  --context_color_hint: var(--color-blue-5);
+  --context_color_interact: var(--color-blue-6);
+
+  background-color: white;
+  color: black;
+}
+.colored_base.text_neutral {
+  color: var(--color-gray-6);
+}
+
+.colored_neutral_base {
+  --context_color_hint: var(--color-blue-5);
+  --context_color_interact: var(--color-blue-6);
+
+  background-color: var(--color-gray-2);
+  color: black;
+}
+
+.colored_frosted-glass {
+  --context_color_hint: var(--color-blue-5);
+  --context_color_interact: var(--color-blue-6);
+
+  backdrop-filter: blur(0.25rem);
+  background-color: #ffffffcc;
+  color: black;
+}
+
+.colored_dark {
+  --context_color_hint: var(--color-blue-5);
+  --context_color_interact: var(--color-blue-6);
+
+  background-color: var(--color-gray-9);
+  color: white;
+}
+
+@media (prefers-contrast: more) {
+  .colored_frosted-glass {
+    backdrop-filter: none;
+    background-color: #ffffff;
+  }
+
+  .colored_base.text_neutral {
+    color: black;
+  }
+}
+
+.colored_brand-1 {
+  --context_color_hint: var(--color-blue-1);
+  --context_color_interact: var(--color-blue-2);
+
+  background-color: var(--color-blue-5);
+  color: white;
+}
+
+/* dark mode */
+@media (prefers-color-scheme: dark) {
+  .colored_base {
+    background-color: black;
+    color: white;
+  }
+  .colored_base.text_neutral {
+    color: var(--color-gray-4);
+  }
+
+  .colored_brand-1 {
+    background-color: black;
+    color: white;
+  }
+
+  .colored_frosted-glass {
+    background-color: #000000bb;
+    color: white;
+  }
+
+  .colored_neutral_base {
+    --context_color_hint: var(--color-blue-5);
+    --context_color_interact: var(--color-blue-6);
+
+    background-color: var(--color-gray-9);
+    color: white;
+  }
+}
+
+@media (prefers-color-scheme: dark) and (prefers-contrast: more) {
+  .colored_frosted-glass {
+    backdrop-filter: none;
+    background-color: black;
+  }
+
+  .colored_base.text_neutral {
+    color: white;
+  }
+}
