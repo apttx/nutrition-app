@@ -38,7 +38,8 @@ import { paginate } from '../pagination.mjs'
  * >}
  */
 export const search = (_, args, context) => {
-  const regular_expression = new RegExp(args.term, 'gi')
+  const escaped_term = args.term.replace(/\^\$\{\}\[\]\(\)\.\?\*\+/gi, '\\$1')
+  const regular_expression = new RegExp(escaped_term, 'gi')
 
   const search_matches = context.foods
     .map((food) => {
